@@ -35,6 +35,7 @@
 use std::cell::RefCell;
 #[allow(unused_imports)]
 use std::thread;
+use std::thread::sleep;
 #[allow(unused_imports)]
 use std::time::Duration;
 
@@ -157,7 +158,22 @@ pub fn double_in_thread(numbers: Vec<i32>) -> Vec<i32> {
     // TODO: Create a new thread to multiply each element of numbers by 2
     // Use thread::spawn and move closure
     // Use join().unwrap() to get result
-    todo!()
+    //todo!()
+    let handle = thread::spawn(
+        move || {
+
+            let mut result:Vec<i32> = Vec::new();
+
+    
+            for x in numbers{
+                result.push(x*2);
+            };
+            result
+        }
+    );
+    handle.join().unwrap()
+
+ 
 }
 
 /// Sum two vectors in parallel, returning a tuple of two sums.
@@ -167,7 +183,33 @@ pub fn double_in_thread(numbers: Vec<i32>) -> Vec<i32> {
 pub fn parallel_sum(a: Vec<i32>, b: Vec<i32>) -> (i32, i32) {
     // TODO: Create two threads to sum a and b respectively
     // Join both threads to get results
-    todo!()
+    //todo!()
+        let handleA = thread::spawn(
+        move || {
+
+            let mut resulta:i32 =0;
+
+    
+            for x in a{
+                resulta+=x;
+            };
+            resulta
+        }
+    );
+    let handleB = thread::spawn(
+        move || {
+
+            let mut resultb:i32 =0;
+
+
+            for x in b{
+            resultb+=x;
+            };
+            resultb
+        }
+    );
+    (handleA.join().unwrap(),handleB.join().unwrap())
+    
 }
 
 // ============================================================================
@@ -183,9 +225,23 @@ pub fn parallel_sum(a: Vec<i32>, b: Vec<i32>) -> (i32, i32) {
 #[allow(unused_variables)]
 pub fn named_sleeper(value: i32, ms: u64) -> i32 {
     // TODO: Create a thread builder with name "sleeper"
+    let builder = thread::Builder::new()
+        .name("sleeper".into())
+        .stack_size(32 * 1024);
+
+     let handle = builder.spawn(move|| {
+
+         sleep(Duration::from_millis(ms));
+         value
+     }).unwrap();
+
+
     // TODO: Spawn a thread that sleeps for `ms` milliseconds and returns `value`
+    
     // TODO: Join the thread and return the value
-    todo!()
+    handle.join().unwrap()
+    
+    //todo!()
 }
 
 thread_local! {
