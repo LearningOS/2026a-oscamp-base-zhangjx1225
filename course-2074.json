@@ -2,16 +2,16 @@
   "schema": 1,
   "courseId": 2074,
   "repository": "LearningOS/2026a-oscamp-base-zhangjx1225",
-  "commit": "4a473c6e9d75aa71d328b4413593b69fec281698",
-  "score": 0,
+  "commit": "431b3254ee824500b7bb94daf28021e88889bb0f",
+  "score": 3,
   "totalScore": 100,
   "exercises": [
     {
       "name": "thread_spawn",
       "max": 3,
-      "score": 0,
-      "status": "fail",
-      "exitCode": 101
+      "score": 3,
+      "status": "pass",
+      "exitCode": 0
     },
     {
       "name": "mutex_counter",
@@ -176,9 +176,9 @@
     }
   ],
   "student": "zhangjx1225",
-  "runId": "44057233136",
+  "runId": "45101084161",
   "runAttempt": "1",
   "upload": {
-    "status": "accepted"
+    "status": "pending"
   }
 }
